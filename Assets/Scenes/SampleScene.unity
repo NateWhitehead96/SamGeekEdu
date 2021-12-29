@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 98803243}
   - component: {fileID: 98803242}
+  - component: {fileID: 98803244}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -205,6 +206,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &98803244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98803241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236e6928aab2f7241ae30c8d1e71450a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowball: {fileID: 4969157721750079975, guid: f6abedac792947448ba879148da031dd, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +356,10 @@ PrefabInstance:
     - target: {fileID: 4969157721750079975, guid: f6abedac792947448ba879148da031dd, type: 3}
       propertyPath: m_Name
       value: Snowball
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969157721750079975, guid: f6abedac792947448ba879148da031dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6abedac792947448ba879148da031dd, type: 3}
