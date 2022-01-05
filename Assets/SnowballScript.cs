@@ -15,5 +15,10 @@ public class SnowballScript : MonoBehaviour
     void Update()
     {
         transform.Translate(MoveToPostion * Time.deltaTime); // translate the ball to our move position at a rate of delta time
+
+        if(transform.position.x > 12 || transform.position.y > 6 || transform.position.y < -6)
+        {
+            Destroy(gameObject);
+        }
     }
 }

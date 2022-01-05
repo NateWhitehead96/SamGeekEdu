@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class ShootSnowball : MonoBehaviour
 {
-    public GameObject snowball; // this will be a refrence to our snowball prefab
+    public GameObject snowball;                            // this will be a refrence to our snowball prefab
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -22,4 +21,5 @@ public class ShootSnowball : MonoBehaviour
             newSnowball.GetComponent<SnowballScript>().MoveToPostion = new Vector3(shootDirection.x, shootDirection.y); // applying movement to our snowball
         }
     }
+
 }
