@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
     public float bounds; // the top and bottom boundary of our game
     public GameObject Enemy; // the prefab enemy to spawn
 
+    public GameObject Powerup; // power up prefab
+
     public float timer; // our current time
     public float SpawnTime = 2; // time it take to spawn
 
@@ -24,6 +26,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if(timer >= SpawnTime && NumberOfEnemies > 0) // spawn the enemy
         {
+            Instantiate(Powerup, transform.position, Quaternion.identity); // TO DO: spawn the powerup randomly between enemy spawns
+
             float randomY = Random.Range(-bounds, bounds); // this is a random number inside our bounds
             GameObject newEnemy = Instantiate(Enemy, new Vector3(transform.position.x, randomY), Quaternion.identity); // spawning the enemy
             newEnemy.GetComponent<EnemyScript>().moveSpeed = Random.Range(1, ScoringSystem.Waves + 1); // randomly set the enemy move speed
@@ -42,6 +46,9 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(5);
         ScoringSystem.Waves++;
         NumberOfEnemies += ScoringSystem.Waves * 3;
-        SpawnTime -= 0.2f;
+        if(SpawnTime > 0.2f) // if the spawntime is more than 0.2 seconds allow the new wave to lower spawn time by 0.2 seconds
+        {
+            SpawnTime -= 0.2f;
+        }
     }
 }

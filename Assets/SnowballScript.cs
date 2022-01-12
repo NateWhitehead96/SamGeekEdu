@@ -5,10 +5,12 @@ using UnityEngine;
 public class SnowballScript : MonoBehaviour
 {
     public Vector3 MoveToPostion; // our mouse position the snowball is going to move to
+
+    public float size; // size of the snowball
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.localScale = new Vector3(size, size, 1); // setting the size of the snowball
     }
 
     // Update is called once per frame
