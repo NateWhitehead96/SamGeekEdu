@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounds: 4.5
   Enemy: {fileID: 2746970317367797471, guid: 935c19ee3626b8940892d545789b3a20, type: 3}
-  Powerup: {fileID: 0}
+  Powerup: {fileID: 922592595818891118, guid: ebf53e441256c5a4197cdbbb2fb47757, type: 3}
   timer: 0
   SpawnTime: 2
   NumberOfEnemies: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   snowball: {fileID: 4969157721750079975, guid: f6abedac792947448ba879148da031dd, type: 3}
   shooting: 0
   shootSpeed: 1
-  snowballSize: 0
+  snowballSize: 0.5
 --- !u!114 &98803245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -479,6 +480,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22128c4bec58d74cafe6167c89e43d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0
+  shakeMagnitude: 0.5
+  damping: 1
+  initalPosition: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

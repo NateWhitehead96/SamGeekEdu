@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
         if(transform.position.x < -10) // when we move too far left kill enemy
         {
             ScoringSystem.Lives--; // lose 1 life when an enemy gets by us
+            FindObjectOfType<ScreenShake>().shakeDuration = 1f; // set shake duration to 1 when enemy goes by player
             Destroy(gameObject);
         }
     }

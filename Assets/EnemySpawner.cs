@@ -26,14 +26,21 @@ public class EnemySpawner : MonoBehaviour
     {
         if(timer >= SpawnTime && NumberOfEnemies > 0) // spawn the enemy
         {
-            Instantiate(Powerup, transform.position, Quaternion.identity); // TO DO: spawn the powerup randomly between enemy spawns
-
+            int randomChance = Random.Range(0, 5); // 1 in 5 chance
             float randomY = Random.Range(-bounds, bounds); // this is a random number inside our bounds
-            GameObject newEnemy = Instantiate(Enemy, new Vector3(transform.position.x, randomY), Quaternion.identity); // spawning the enemy
-            newEnemy.GetComponent<EnemyScript>().moveSpeed = Random.Range(1, ScoringSystem.Waves + 1); // randomly set the enemy move speed
+            if (randomChance == 0) // if we pull the chance to do a powerup
+            {
+                Instantiate(Powerup, new Vector3(transform.position.x, randomY), Quaternion.identity); // randomly spawn a power up
+            }
+            else // any other number will trigger spawning an enemy
+            {
+                GameObject newEnemy = Instantiate(Enemy, new Vector3(transform.position.x, randomY), Quaternion.identity); // spawning the enemy
+                newEnemy.GetComponent<EnemyScript>().moveSpeed = Random.Range(1, ScoringSystem.Waves + 1); // randomly set the enemy move speed
+                NumberOfEnemies--;
+            }
             timer = 0; // reset timer
-            NumberOfEnemies--;
-            if(NumberOfEnemies <= 0) // when we run our of enemies to spawn start the next wave
+
+            if (NumberOfEnemies <= 0) // when we run our of enemies to spawn start the next wave
             {
                 StartCoroutine(NewWave());
             }
