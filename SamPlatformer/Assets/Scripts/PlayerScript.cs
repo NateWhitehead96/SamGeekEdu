@@ -16,6 +16,10 @@ public class PlayerScript : MonoBehaviour
 
     public Transform Checkpoint; // the respawn point
 
+    // HUD variables
+    public int Health = 3; // how much health we have
+    public int Score; // our total score every level
+
     // cheat code stuff
     public GameObject CheatCanavs; // access to cheat canvas
     public bool devCheats; // dev cheats

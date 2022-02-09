@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Heart : MonoBehaviour
 {
     public int direction = 1; // the direction the coin goes
 
@@ -20,11 +20,11 @@ public class Coin : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + direction * Time.deltaTime); // moving the coin up or down
 
-        if(transform.position.y > topBound)
+        if (transform.position.y > topBound)
         {
             direction = -1;
         }
-        if(transform.position.y < botBound)
+        if (transform.position.y < botBound)
         {
             direction = 1;
         }
@@ -34,9 +34,10 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerScript>().Score++; // add to our score when we collect the coin
+            collision.gameObject.GetComponent<PlayerScript>().Health++; // add 1 heart back to our player
+            if (collision.gameObject.GetComponent<PlayerScript>().Health > 3)
+                collision.gameObject.GetComponent<PlayerScript>().Health = 3;
             Destroy(gameObject); // destroy the coin
-            // add points later
         }
     }
 }
