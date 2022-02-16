@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool jumping; // to help with transitioning to jump animation
     public bool walking; // to help with transitioning to walking animation
+    public bool climbing; // to help with transitioning to climing animation
 
     public Transform Checkpoint; // the respawn point
 
@@ -23,6 +24,8 @@ public class PlayerScript : MonoBehaviour
     // cheat code stuff
     public GameObject CheatCanavs; // access to cheat canvas
     public bool devCheats; // dev cheats
+
+    public static bool hasKey; // this bool tells us if we have the key from the level
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +77,15 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        if(Input.GetKey(KeyCode.W) && climbing == true) // climbing up
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
+        }
+        if(Input.GetKey(KeyCode.S) && climbing == true) // climbing down
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
+        }
+
         if (Input.GetKeyDown(KeyCode.BackQuote)) // when we hit the squiggly line
         {
             if (CheatCanavs.activeInHierarchy) // it's on the screen
@@ -103,6 +115,24 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathplane"))
         {
             transform.position = Checkpoint.position; // reset our position to the checkpoint
+        }
+        if (collision.gameObject.CompareTag("Key"))
+        {
+            hasKey = true; // flip key bool
+            Destroy(collision.gameObject); // destroy key from game
+        }
+        if (collision.gameObject.CompareTag("Ladder")) // when we hop on the ladder
+        {
+            climbing = true;
+            rb.gravityScale = 0;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ladder")) // jumping off the ladder
+        {
+            climbing = false;
+            rb.gravityScale = 1;
         }
     }
 }

@@ -7,6 +7,8 @@ TagManager:
   - Button
   - Head
   - Deathplane
+  - Key
+  - Ladder
   layers:
   - Default
   - TransparentFX
