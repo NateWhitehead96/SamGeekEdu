@@ -9,6 +9,7 @@ TagManager:
   - Deathplane
   - Key
   - Ladder
+  - HiddenWalls
   layers:
   - Default
   - TransparentFX

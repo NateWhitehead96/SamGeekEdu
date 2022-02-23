@@ -19,28 +19,48 @@ public class DoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (requiresKey == false)
+        // the level exit doors will require the key now
+        if(requiresKey == true)
         {
-            if (GameManager.instance.LevelsBeaten < nextLevel) // if the next level is greater than how many we've beaten, then set levels beaten to that, else dont
+            if(Input.GetKeyDown(KeyCode.W) && inDoor == true && PlayerScript.hasKey == true)
             {
-                GameManager.instance.LevelsBeaten = nextLevel;
+                if (nextLevel > GameManager.instance.LevelsBeaten)
+                {
+                    GameManager.instance.LevelsBeaten = nextLevel;
+                    SceneManager.LoadScene(LevelToLoad);
+                    PlayerScript.hasKey = false;
+                }
             }
-            if (Input.GetKeyDown(KeyCode.W) && inDoor == true)
+        }
+        else // our level doors will just load the level if we have enough levels beaten
+        {
+            if(Input.GetKeyDown(KeyCode.W) && inDoor == true && GameManager.instance.LevelsBeaten >= LevelToLoad)
             {
                 SceneManager.LoadScene(LevelToLoad);
             }
         }
-        else if(requiresKey == true)
-        {
-            if (Input.GetKeyDown(KeyCode.W) && inDoor == true && PlayerScript.hasKey == true) // if we're in the door and got the next levels key
-            {
-                if(GameManager.instance.LevelsBeaten >= LevelToLoad) // this is used for entering a new level
-                {
-                    SceneManager.LoadScene(LevelToLoad);
-                    PlayerScript.hasKey = false; // make sure the key gets used up
-                }
-            }
-        }
+        //if (requiresKey == false)
+        //{
+        //    if (GameManager.instance.LevelsBeaten < nextLevel) // if the next level is greater than how many we've beaten, then set levels beaten to that, else dont
+        //    {
+        //        GameManager.instance.LevelsBeaten = nextLevel;
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.W) && inDoor == true)
+        //    {
+        //        SceneManager.LoadScene(LevelToLoad);
+        //    }
+        //}
+        //else if(requiresKey == true)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.W) && inDoor == true && PlayerScript.hasKey == true) // if we're in the door and got the next levels key
+        //    {
+        //        if(GameManager.instance.LevelsBeaten >= LevelToLoad) // this is used for entering a new level
+        //        {
+        //            SceneManager.LoadScene(LevelToLoad);
+        //            PlayerScript.hasKey = false; // make sure the key gets used up
+        //        }
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision) // when we walk into the door, we can go through

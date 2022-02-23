@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -126,6 +127,10 @@ public class PlayerScript : MonoBehaviour
             climbing = true;
             rb.gravityScale = 0;
         }
+        if (collision.gameObject.CompareTag("HiddenWalls"))
+        {
+            collision.gameObject.GetComponent<TilemapRenderer>().enabled = false; // disable the tile renders when we walk into it
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -133,6 +138,10 @@ public class PlayerScript : MonoBehaviour
         {
             climbing = false;
             rb.gravityScale = 1;
+        }
+        if (collision.gameObject.CompareTag("HiddenWalls"))
+        {
+            collision.gameObject.GetComponent<TilemapRenderer>().enabled = true; // enable the tile renders when we walk into it
         }
     }
 }

@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelToLoad: 0
   inDoor: 0
-  requiresKey: 0
+  requiresKey: 1
   nextLevel: 2
 --- !u!61 &216321153
 BoxCollider2D:
