@@ -64,6 +64,7 @@ public class PlayerScript : MonoBehaviour
 
         animator.SetBool("isWalking", walking); // handle transition to walking animation
         animator.SetBool("isJumping", jumping); // handle transition to jumping animation
+        animator.SetBool("isClimbing", climbing); // handle the climing animation
 
         if (Input.GetKeyDown(KeyCode.Space) && jumping == false) // when we hit space and we aren't currently jumping then jump
         {
@@ -99,8 +100,19 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
-
-
+    // Hurt function that enemies will use
+    public void HurtPlayer()
+    {
+        StartCoroutine(HurtStuff());
+    }
+    IEnumerator HurtStuff()
+    {
+        animator.SetBool("isHurt", true); // play hurt animation
+        Health--;
+        SoundManager.instance.hurtSound.Play(); // play the hurt sound
+        yield return new WaitForSeconds(1);
+        animator.SetBool("isHurt", false);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

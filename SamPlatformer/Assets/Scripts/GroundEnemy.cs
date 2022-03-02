@@ -36,7 +36,7 @@ public class GroundEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerScript>().Health--;
+            collision.gameObject.GetComponent<PlayerScript>().HurtPlayer();
         }
     }
 }

@@ -34,6 +34,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            SoundManager.instance.coinSound.Play(); // play the coin sound
             collision.gameObject.GetComponent<PlayerScript>().Score++; // add to our score when we collect the coin
             Destroy(gameObject); // destroy the coin
             // add points later

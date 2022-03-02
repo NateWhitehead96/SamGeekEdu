@@ -40,7 +40,7 @@ public class Thwamp : MonoBehaviour
         rb.gravityScale = 0; // set gravity to 0 to allow thwamp to go back up
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerScript>().Health--; // lose health when touching the thwamp
+            collision.gameObject.GetComponent<PlayerScript>().HurtPlayer(); // lose health when touching the thwamp
         }
     }
 }
