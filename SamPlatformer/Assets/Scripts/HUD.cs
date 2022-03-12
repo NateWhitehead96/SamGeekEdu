@@ -10,6 +10,7 @@ public class HUD : MonoBehaviour
     public Image HeartThree;
 
     public Text ScoreText;
+    public Text LivesText;
 
     public Sprite EmptyHeart;
     public Sprite FullHeart;
@@ -25,6 +26,7 @@ public class HUD : MonoBehaviour
     void Update()
     {
         ScoreText.text = player.Score.ToString(); // constantly update our score
+        LivesText.text = GameManager.instance.Lives.ToString();
         if(player.Health == 3)
         {
             HeartThree.sprite = FullHeart;

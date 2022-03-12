@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     public bool climbing; // to help with transitioning to climing animation
 
     public Transform Checkpoint; // the respawn point
+    public Transform StartPoint; // the starting respawn point
 
     // HUD variables
     public int Health = 3; // how much health we have
@@ -35,6 +36,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>(); // make sure our rigibody is set
         animator = GetComponent<Animator>(); // make sure our animator is this game objects
         CheatCanavs.SetActive(false); // when we play always have cheat canvas hidden
+        StartPoint = Checkpoint; // so we dont have to set the start
     }
 
     // Update is called once per frame
@@ -110,6 +112,12 @@ public class PlayerScript : MonoBehaviour
         animator.SetBool("isHurt", true); // play hurt animation
         Health--;
         SoundManager.instance.hurtSound.Play(); // play the hurt sound
+        if (Health <= 0) // when we die
+        {
+            GameManager.instance.Lives--;
+            transform.position = StartPoint.position;
+            Health = 3;
+        }
         yield return new WaitForSeconds(1);
         animator.SetBool("isHurt", false);
     }

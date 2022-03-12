@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerScript>().Checkpoint.position = transform.position; // set the checkpoint
+            collision.gameObject.GetComponent<PlayerScript>().Checkpoint = transform; // set the checkpoint
         }
     }
 }
