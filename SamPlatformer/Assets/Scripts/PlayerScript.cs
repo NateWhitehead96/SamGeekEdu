@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
 
     // HUD variables
     public int Health = 3; // how much health we have
-    public int Score; // our total score every level
+    //public int Score; // our total score every level
 
     // cheat code stuff
     public GameObject CheatCanavs; // access to cheat canvas
@@ -115,7 +115,7 @@ public class PlayerScript : MonoBehaviour
         if (Health <= 0) // when we die
         {
             GameManager.instance.Lives--;
-            transform.position = StartPoint.position;
+            transform.position = Checkpoint.position; // just respawn at the last checkpoint
             Health = 3;
         }
         yield return new WaitForSeconds(1);
@@ -140,7 +140,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Key"))
         {
             hasKey = true; // flip key bool
-            Destroy(collision.gameObject); // destroy key from game
+            //Destroy(collision.gameObject); // destroy key from game
         }
         if (collision.gameObject.CompareTag("Ladder")) // when we hop on the ladder
         {

@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 256086902}
   - component: {fileID: 256086901}
   - component: {fileID: 256086900}
+  - component: {fileID: 256086903}
   m_Layer: 0
   m_Name: BlueKey
   m_TagString: Key
@@ -560,6 +561,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &256086903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256086899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986a6fec92769074da254b0c0066b615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offSet: {x: 0, y: 0.5, z: 0}
+  player: {fileID: 0}
+  collected: 0
+  exitDoor: {fileID: 216321152}
 --- !u!1 &267003185
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,6 +2591,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelsBeaten: 0
+  Lives: 0
+  coins: 0
 --- !u!4 &403781025
 Transform:
   m_ObjectHideFlags: 0

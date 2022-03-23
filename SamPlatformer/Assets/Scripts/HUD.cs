@@ -25,7 +25,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ScoreText.text = player.Score.ToString(); // constantly update our score
+        ScoreText.text = GameManager.instance.coins.ToString(); // constantly update our score
         LivesText.text = GameManager.instance.Lives.ToString();
         if(player.Health == 3)
         {

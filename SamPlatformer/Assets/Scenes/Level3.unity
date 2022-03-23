@@ -2385,7 +2385,7 @@ GameObject:
   - component: {fileID: 604169106}
   - component: {fileID: 604169105}
   m_Layer: 0
-  m_Name: platformPack_tilesheet_67
+  m_Name: ExitDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10802,6 +10802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelsBeaten: 1
+  Lives: 0
+  coins: 0
 --- !u!4 &1233400383
 Transform:
   m_ObjectHideFlags: 0
@@ -12515,6 +12517,7 @@ GameObject:
   - component: {fileID: 1897008045}
   - component: {fileID: 1897008044}
   - component: {fileID: 1897008043}
+  - component: {fileID: 1897008046}
   m_Layer: 0
   m_Name: Key
   m_TagString: Key
@@ -12613,6 +12616,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1897008046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897008042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986a6fec92769074da254b0c0066b615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offSet: {x: 0, y: 0.5, z: 0}
+  player: {fileID: 0}
+  collected: 0
+  exitDoor: {fileID: 604169105}
 --- !u!1001 &1922230376
 PrefabInstance:
   m_ObjectHideFlags: 0
