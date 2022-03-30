@@ -28,21 +28,35 @@ public class PlayerScript : MonoBehaviour
     public bool devCheats; // dev cheats
 
     public static bool hasKey; // this bool tells us if we have the key from the level
-
+    public GameObject PauseCanvas;
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         sprite = GetComponent<SpriteRenderer>(); // makes sure our sprite is the sprite of this gameobject
         rb = GetComponent<Rigidbody2D>(); // make sure our rigibody is set
         animator = GetComponent<Animator>(); // make sure our animator is this game objects
         CheatCanavs.SetActive(false); // when we play always have cheat canvas hidden
+        PauseCanvas.SetActive(false);
         StartPoint = Checkpoint; // so we dont have to set the start
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            if (PauseCanvas.activeInHierarchy) // if it's active
+            {
+                Time.timeScale = 1; 
+                PauseCanvas.SetActive(false);
+            }
+            else // if its not active
+            {
+                Time.timeScale = 0;
+                PauseCanvas.SetActive(true);
+            }
+        }
         if (Input.GetKey(KeyCode.D)) // moving right
         {
             transform.position = new Vector3(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
@@ -136,6 +150,8 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathplane"))
         {
             transform.position = Checkpoint.position; // reset our position to the checkpoint
+            GameManager.instance.Lives--;
+            Health = 3;
         }
         if (collision.gameObject.CompareTag("Key"))
         {

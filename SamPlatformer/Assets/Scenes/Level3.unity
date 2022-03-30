@@ -2403,7 +2403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b04e1fb3e1c5e84c9020994d7aaefcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelToLoad: 0
+  LevelToLoad: 6
   inDoor: 0
   requiresKey: 1
   nextLevel: 4

@@ -30,6 +30,7 @@ public class DoorScript : MonoBehaviour
                     SceneManager.LoadScene(LevelToLoad);
                     PlayerScript.hasKey = false;
                 }
+                GameManager.instance.SaveGame(); // save our data when we beat a level regardless of if we've beaten previously
             }
         }
         else // our level doors will just load the level if we have enough levels beaten
