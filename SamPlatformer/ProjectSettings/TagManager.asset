@@ -10,6 +10,7 @@ TagManager:
   - Key
   - Ladder
   - HiddenWalls
+  - Powerup
   layers:
   - Default
   - TransparentFX

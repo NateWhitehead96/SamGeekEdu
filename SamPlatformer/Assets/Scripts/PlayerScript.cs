@@ -29,6 +29,10 @@ public class PlayerScript : MonoBehaviour
 
     public static bool hasKey; // this bool tells us if we have the key from the level
     public GameObject PauseCanvas;
+
+    public bool hasPowerUp; // this bool will help us with our level 5 power up
+    public GameObject Fireball; // this is the fireball projectile
+    public Transform shootPosition; // where the bullet comes from
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +65,7 @@ public class PlayerScript : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
             sprite.flipX = false; // make sure we're facing right
+            shootPosition.position = new Vector3(transform.position.x + 0.7f, transform.position.y); // make sure shoot pos is facing right way
             walking = true;
         }
         if (Input.GetKeyUp(KeyCode.D)) // release the key
@@ -71,6 +76,7 @@ public class PlayerScript : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
             sprite.flipX = true; // make sure we're facing left
+            shootPosition.position = new Vector3(transform.position.x - 0.7f, transform.position.y);
             walking = true;
         }
         if (Input.GetKeyUp(KeyCode.A)) // release the key
@@ -114,6 +120,14 @@ public class PlayerScript : MonoBehaviour
             {
                 CheatCanavs.SetActive(true);
             }
+        }
+
+        if (Input.GetMouseButtonDown(0) && hasPowerUp) // shoot fireball only when we have the powerup
+        {
+            GameObject newFireball = Instantiate(Fireball, shootPosition.position, transform.rotation);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 shootDirection = mousePosition - shootPosition.position;
+            newFireball.GetComponent<Fireball>().MoveToPosition = new Vector3(shootDirection.x, shootDirection.y);
         }
     }
     // Hurt function that enemies will use
@@ -166,6 +180,11 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("HiddenWalls"))
         {
             collision.gameObject.GetComponent<TilemapRenderer>().enabled = false; // disable the tile renders when we walk into it
+        }
+        if (collision.gameObject.CompareTag("Powerup"))
+        {
+            hasPowerUp = true;
+            Destroy(collision.gameObject);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
