@@ -37,4 +37,12 @@ public class ButtonScript : MonoBehaviour // holds all the different button inpu
     {
         SceneManager.LoadScene("HubWorld");
     }
+
+    public void ResetProgress()
+    {
+        if (PlayerPrefs.HasKey("Lives"))
+        {
+            PlayerPrefs.DeleteAll(); // deletes all save progress
+        }
+    }
 }

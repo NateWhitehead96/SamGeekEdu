@@ -27,9 +27,9 @@ public class DoorScript : MonoBehaviour
                 if (nextLevel > GameManager.instance.LevelsBeaten)
                 {
                     GameManager.instance.LevelsBeaten = nextLevel;
-                    SceneManager.LoadScene(LevelToLoad);
                     PlayerScript.hasKey = false;
                 }
+                SceneManager.LoadScene(LevelToLoad);
                 GameManager.instance.SaveGame(); // save our data when we beat a level regardless of if we've beaten previously
             }
         }
