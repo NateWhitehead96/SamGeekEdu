@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed;
     public float jumpForce;
+    public bool jumping;
     public Rigidbody rb;
 
     public float horizontalSpeed;
@@ -14,6 +15,9 @@ public class Player : MonoBehaviour
     public float yRotation;
 
     public Vector3 forwardDirection; // a new vector3 to know our forward vector
+
+    public bool exposed; // player is in the light
+    public Transform restart;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,9 +54,35 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && jumping == false)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumping = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Light"))
+        {
+            exposed = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Light"))
+        {
+            exposed = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        jumping = false;
+
+        if (collision.gameObject.GetComponent<PatrolEnemy>())
+        {
+            transform.position = restart.position;
         }
     }
 }

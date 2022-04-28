@@ -9,8 +9,8 @@ public class PatrolEnemy : MonoBehaviour
     public Transform[] patrolPoints;
     public int pointCounter; // keep track of the point we're on
     bool reachedCheckpoint;
-    bool playerDetected;
-    public Transform raycastPos;
+    public bool playerDetected;
+    //public Transform raycastPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,28 +22,28 @@ public class PatrolEnemy : MonoBehaviour
     {
         if (!playerDetected)
             agent.SetDestination(patrolPoints[pointCounter].position); // set and move the AI to this position
-        else if (playerDetected)
+        if (playerDetected)
         {
             agent.SetDestination(FindObjectOfType<Player>().transform.position); // to be fixed, but makes enemy follow player if detected
-            if(agent.remainingDistance >= 10)
+            if (agent.remainingDistance >= 50 && playerDetected == true)
             {
                 playerDetected = false;
             }
         }
-        if(agent.remainingDistance <= 0 && reachedCheckpoint == false)
+        if (agent.remainingDistance <= 0 && reachedCheckpoint == false && playerDetected == false)
         {
             StartCoroutine(MoveToNextPoint());
         }
 
-        RaycastHit hit;
-        if(Physics.Raycast(raycastPos.position, transform.forward, out hit, Mathf.Infinity))
-        {
-            Debug.DrawRay(raycastPos.position, transform.forward, Color.red);
-            if (hit.collider.GetComponent<Player>())
-            {
-                playerDetected = true;
-            }
-        }
+        //RaycastHit hit;
+        //if(Physics.Raycast(raycastPos.position, transform.forward, out hit, Mathf.Infinity))
+        //{
+        //    Debug.DrawRay(raycastPos.position, transform.forward, Color.red);
+        //    if (hit.collider.GetComponent<Player>())
+        //    {
+        //        playerDetected = true;
+        //    }
+        //}
     }
 
     IEnumerator MoveToNextPoint()
