@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
 
     public bool exposed; // player is in the light
     public Transform restart;
+
+    public GameObject flashLight;
+    public int notesCollected; // how many notes we collect
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,18 @@ public class Player : MonoBehaviour
         Move(); // handle all of the moving
         RotatePlayer(); // handle all rotations
         Jump(); // handle jumping
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (flashLight.activeInHierarchy)
+            {
+                flashLight.SetActive(false);
+            }
+            else
+            {
+                flashLight.SetActive(true);
+            }
+        }
     }
 
     void Move()
@@ -83,6 +98,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.GetComponent<PatrolEnemy>())
         {
             transform.position = restart.position;
+        }
+        if (collision.gameObject.GetComponent<Note>())
+        {
+            notesCollected++;
+            Destroy(collision.gameObject);
         }
     }
 }
