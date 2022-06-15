@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -21,11 +23,17 @@ public class Player : MonoBehaviour
 
     public GameObject flashLight;
     public int notesCollected; // how many notes we collect
+    public Text NoteText;
+    public GameObject LoseScreen;
+
+    public Vector3 testpos;
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; // lock our cursor to the middle of the screen
+        LoseScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,7 +42,7 @@ public class Player : MonoBehaviour
         Move(); // handle all of the moving
         RotatePlayer(); // handle all rotations
         Jump(); // handle jumping
-
+        NoteText.text = "Notes Collected: " + notesCollected + "/5";
         if (Input.GetMouseButtonDown(0))
         {
             if (flashLight.activeInHierarchy)
@@ -53,6 +61,10 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal"); // gets any horizontal inputs (A, D, left/right arrows, left stick gamepad)
         float vertical = Input.GetAxisRaw("Vertical"); // gets any vertical input
         forwardDirection = (transform.forward * vertical) + (transform.right * horizontal);
+        if (forwardDirection != Vector3.zero)
+            exposed = true;
+        else
+            exposed = false;
         transform.position += forwardDirection * (moveSpeed * Time.deltaTime);
     }
     void RotatePlayer()
@@ -101,8 +113,24 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<Note>())
         {
+            testpos = collision.transform.position;
+            FindObjectOfType<MonsterScript>().moveDirection = testpos; // set the location
+            FindObjectOfType<MonsterScript>().state = State.Alert; // alert the monster
+            //FindObjectOfType<MonsterScript>().agent.SetDestination();
             notesCollected++;
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.GetComponent<MonsterScript>())
+        {
+            LoseScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+        }
+    }
+
+    public void ReplayGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
