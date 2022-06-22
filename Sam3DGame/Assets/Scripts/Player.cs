@@ -54,6 +54,10 @@ public class Player : MonoBehaviour
                 flashLight.SetActive(true);
             }
         }
+        if(notesCollected == 5)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     void Move()
@@ -118,6 +122,8 @@ public class Player : MonoBehaviour
             FindObjectOfType<MonsterScript>().state = State.Alert; // alert the monster
             //FindObjectOfType<MonsterScript>().agent.SetDestination();
             notesCollected++;
+            FindObjectOfType<NoteIndicator>().notes.Remove(collision.gameObject.GetComponent<Note>());
+            FindObjectOfType<NoteIndicator>().nearestDistance = float.MaxValue; // reset the nearest thing
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.GetComponent<MonsterScript>())

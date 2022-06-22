@@ -6,6 +6,7 @@ public class SpawnRandomNotes : MonoBehaviour
 {
     public List<GameObject> places;
     public GameObject Note;
+    public NoteIndicator indicator;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,8 @@ public class SpawnRandomNotes : MonoBehaviour
         for (int i = 0; i < 5; i++) // spawn 5 notes
         {
             int pick = Random.Range(0, places.Count); // pick a random spot from our list
-            Instantiate(Note, places[pick].transform.position, places[pick].transform.rotation); // spawn note
+            GameObject newNote = Instantiate(Note, places[pick].transform.position, places[pick].transform.rotation); // spawn note
+            indicator.notes.Add(newNote.GetComponent<Note>()); // add each note we spawn into this thing
             places.RemoveAt(pick); // remove the spot
         }
     }
